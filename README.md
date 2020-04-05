@@ -28,9 +28,17 @@ For example:
 docker run -d onichandame/epics-proxy
 ```
 
-# API
+# Rest API
 
 ## HTTP GET /\<pvname\>
+
+equivalent of `caget(\<pvname\>)`
+
+## HTTP PUT /\<pvname\>
+
+equivalent of `caput(\<pvname\>, value)` where the value is encoded in the body
+
+## HTTP GET /?pvname[]=\<pvname\>
 
 equivalent of `caget(\<pvname\>)`
 
