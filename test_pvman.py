@@ -16,5 +16,6 @@ class TestPvMan(TestCase):
     def test_get(self):
         man = subject()
         with patch.object(man, 'get_pv') as mock_get_pv:
-            man.get('asdf')
-            mock_get_pv.assert_called_once_with(as_string=True, )
+            mock_get_pv.return_value.get.return_value = 'asdf'
+            self.assertEqual(man.get('asdf'), 'asdf')
+            mock_get_pv.assert_called_once()
