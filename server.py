@@ -23,7 +23,7 @@ def put(pvname):
     else:
         return Response(status=400)
 
-@socket.on('join')
+@socket.on('connect')
 def on_join(data):
     def handle(pvname=None, value=None, timestamp=None, **kwargs):
         emit(data['pvname'], {'value': value}, room=data['pvname'])
