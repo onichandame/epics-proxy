@@ -1,0 +1,7 @@
+1. thorough test
+  1. measure delay of HTTP when large concurrent ingress
+  2. test if multiple socket io client get data
+  3. test if socket io client register/unregister currectly
+  4. test if pv connections are managed correctly
+2. add socket io based get and put
+3. add production server

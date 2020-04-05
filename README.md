@@ -46,11 +46,11 @@ equivalent of `caget(\<pvname\>)`
 
 equivalent of `caput(\<pvname\>, value)` where the value is encoded in the body
 
-## WebSocket
+## Socket IO /
 
 ```javascript
-const socket = new WebSocket('ws://localhost/\<pvname\>')
-socket.addEventListener('message', event => console.log(`the current value is ${event.data}`))
+var socket = require('socket.io-client')('http://localhost')
+socket.on('message', data => console.log(data))
 ```
 
 equivalent of `camonitor(\<pvname\>)`

@@ -2,11 +2,11 @@ from flask import Flask, request, Response
 from flask_socketio import SocketIO, join_room, emit
 
 from pvman import PvManager
+from roomman import RoomManager
+from app import app, socket
 
 pv_manager = PvManager()
-
-app = Flask(__name__)
-socket = SocketIO(app)
+room_manager = RoomManager()
 
 @app.route('/<pvname>', methods=['GET'])
 def get(pvname):
@@ -23,16 +23,21 @@ def put(pvname):
     else:
         return Response(status=400)
 
-@socket.on('connect')
-def on_join(data):
-    def handle(pvname=None, value=None, timestamp=None, **kwargs):
-        emit(data['pvname'], {'value': value}, room=data['pvname'])
-    join_room(data['pvname'])
-    pv_manager.monitor(data['pvname'], handle)
+@socket.on('monitor')
+def monitor(pvname):
+    user = request.sid
+    join_room(pvname)
+    room_manager.add(user, pvname)
+
+@socket.on('disconnect')
+def on_leave():
+    uid = request.sid
+    room_manager.remove(uid)
 
 @socket.on('leave')
-def on_leave(data):
-    pv_manager.unmonitor(data['pvname'])
+def on_leave():
+    uid = request.sid
+    room_manager.remove(uid)
 
 if __name__ == '__main__':
     socket.run(app, port=80)
