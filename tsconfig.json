@@ -2,11 +2,11 @@
   "compilerOptions":{
     "noEmit": false,
     "esModuleInterop": true,
+    "baseUrl":".",
+    "paths":{
+      "*":["src/types/*"]
+    },
     "sourceMap": true,
-    "typeRoots":[
-      "src/types",
-      "node_modules/@types"
-    ],
     "outDir": "dist"
   },
   "include":[
