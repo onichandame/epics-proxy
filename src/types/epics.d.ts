@@ -17,7 +17,7 @@ declare module 'epics'{
     timeout?: number
     fieldType?: string
   }
-  type Data = number & string
+  type Data = number | string
   export class Channel {
     constructor (pvName:string)
     public state(): State
