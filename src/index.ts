@@ -1,52 +1,18 @@
-import express from 'express'
-import * as bodyParser from 'body-parser'
-import { Channel } from 'epics'
+import { ApolloServer } from 'apollo-server'
 
-const port = isNaN(parseInt(process.env.PORT)) ? 3000 : parseInt(process.env.PORT)
+import { typeDefs } from './db/schema'
+import { resolvers } from './db/resolvers'
 
-const app = express()
+const PORT = isNaN(parseInt(process.env.PORT)) ? 3000 : parseInt(process.env.PORT)
 
-app.use(bodyParser.text())
-
-app.get('*', (req, res) => {
-  const pvname = req.path.slice(1)
-  const pv = new Channel(pvname)
-    .connect((err:Error) => {
-      if (err) {
-        console.log(err)
-        res.status(500).send(JSON.stringify(err))
-      }
-      pv.get((error, data) => {
-        if (error) {
-          console.log(error)
-          res.status(500).send(JSON.stringify(error))
-        }
-        res.status(200).send(JSON.stringify(data))
-      })
-    })
+const server = new ApolloServer({
+  typeDefs,
+  resolvers
 })
 
-app.put('*', (req, res) => {
-  const pvname = req.path.slice(1)
-  const value = req.body
-  const pv = new Channel(pvname)
-    .connect((err:Error) => {
-      if (err) {
-        console.log(err)
-        res.status(500).send(JSON.stringify(err))
-      }
-      pv.put(value, (error:Error) => {
-        if (error) {
-          console.log(error)
-          res.status(500).send(JSON.stringify(error))
-        }
-        res.status(200).send()
-      })
-    })
+server.listen({
+  port: PORT
 })
-
-app.all('*', (req, res) => {
-  res.send(`unsupported method ${req.method}`)
-})
-
-app.listen(port, () => console.log(`listening on port ${port}`))
+  .then(({ url }) => {
+    console.log(`🚀 server ready at ${url}`)
+  })

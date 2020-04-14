@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/onichandame/epics-proxy#readme",
   "devDependencies": {
-    "@types/express": "^4.17.6",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
     "eslint": "^6.8.0",
@@ -39,8 +38,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "epics": "^0.0.8",
-    "express": "^4.17.1"
+    "apollo-server": "^2.12.0",
+    "epics": "^0.0.8"
   }
 }
