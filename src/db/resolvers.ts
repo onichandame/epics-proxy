@@ -20,11 +20,14 @@ class GetArgs {
   pvname: string
 }
 
-@Resolver(Channel)
+@Resolver(() => Channel)
 export class ChannelResolver {
   @Query(() => Channel)
   async caget (@Args(){ pvname }: GetArgs) {
-    return { pvname, value: await get(pvname) }
+    console.log('calling get')
+    const value = await get(pvname)
+    console.log('called get')
+    return { value }
   }
 
   @Mutation(() => Boolean)
@@ -45,9 +48,8 @@ export class ChannelResolver {
       return itr
     }
   })
-  camonitor (@Root() value: Channel['value'], @Args() { pvname }: GetArgs): Channel {
+  camonitor (@Root() value: Channel['value']): Channel {
     return {
-      pvname,
       value
     }
   }

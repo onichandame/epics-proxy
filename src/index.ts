@@ -9,14 +9,11 @@ import { ChannelResolver } from './db/resolvers'
 
   const server = new ApolloServer({
     schema: await buildSchema({
+      validate: false,
       resolvers: [ChannelResolver]
     })
   })
 
-  server.listen({
-    port: PORT
-  })
-    .then(({ url }) => {
-      console.log(`🚀 server ready at ${url}`)
-    })
+  const { url } = await server.listen({ port: PORT })
+  console.log(`🚀 server ready at ${url}`)
 })()
