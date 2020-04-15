@@ -1,3 +1,3 @@
 export * from './get'
 export * from './put'
-export * from './monitor'
+export * from './conmanager'
