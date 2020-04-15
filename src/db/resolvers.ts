@@ -7,17 +7,17 @@ import { withClose } from './utils'
 
 @ArgsType()
 class PutArgs {
-  @Field(() => String, { nullable: false })
-  pvname=''
+  @Field(() => String)
+  pvname: string
 
-  @Field(() => String, { nullable: false })
-  value=''
+  @Field(() => String)
+  value: string
 }
 
 @ArgsType()
 class GetArgs {
-  @Field(() => String, { nullable: false })
-  pvname=''
+  @Field(() => String)
+  pvname: string
 }
 
 @Resolver(Channel)

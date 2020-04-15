@@ -2,10 +2,9 @@ import { ObjectType, Field } from 'type-graphql'
 
 @ObjectType()
 export class Channel {
-  @Field({ nullable: false })
+  @Field()
   pvname: string
 
-  @Field({ nullable: false })
+  @Field()
   value: string
 }
-

@@ -33,5 +33,3 @@ export const addCon = async (pvname: string): Promise<Channel> => {
   }
   return channels.get(pvname).channel
 }
-
-export default monitor
