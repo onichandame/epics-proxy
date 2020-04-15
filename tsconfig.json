@@ -1,5 +1,10 @@
 {
   "compilerOptions":{
+    "emitDecoratorMetadata": true,
+    "module":"CommonJS",
+    "experimentalDecorators": true,
+    "target":"ES2016",
+    "lib":["ES2016","ESNext.AsyncIterable"],
     "noEmit": false,
     "esModuleInterop": true,
     "baseUrl":".",
