@@ -9,7 +9,7 @@ export const caget = async (pvname: string): Promise<string> => {
       } else {
         resolve(d.toString())
       }
-      pv.disconnect()
     })
+      .disconnect()
   })
 }
