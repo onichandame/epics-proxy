@@ -4,7 +4,7 @@
   "description": "A proxy bringing EPICS IOC to the modern web.",
   "main": "dist/index.js",
   "engines": {
-    "node": "^10"
+    "node": "<13"
   },
   "scripts": {
     "lint": "eslint src --ext .ts",
@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "apollo-server": "^2.12.0",
-    "epics": "^0.0.8",
+    "epics-ioc-connection": "^0.0.1",
     "graphql": "^14",
     "reflect-metadata": "^0.1.13"
   }

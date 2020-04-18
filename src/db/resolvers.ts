@@ -1,8 +1,8 @@
 import { Field, Resolver, Query, Mutation, Subscription, Args, ArgsType, Root } from 'type-graphql'
 
-import { get, put } from './ioc'
+import { get, put } from './connection'
 import { Channel } from './channel'
-import { pubsub, addSub, removeSub } from './submanager'
+import { manager } from './subscription'
 import { withClose } from './utils'
 
 @ArgsType()
