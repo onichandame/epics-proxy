@@ -10,7 +10,7 @@
     "lint": "eslint src --ext .ts",
     "test": "jest",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node .",
     "dev": "nodemon",
     "generate": "graphql-codegen --config codegen.yml"
   },
