@@ -24,9 +24,7 @@ class GetArgs {
 export class ChannelResolver {
   @Query(() => Channel)
   async caget (@Args(){ pvname }: GetArgs) {
-    console.log('calling get')
     const value = await get(pvname)
-    console.log('called get')
     return { value }
   }
 
@@ -42,9 +40,9 @@ export class ChannelResolver {
 
   @Subscription({
     subscribe: ({ args }) => {
-      const itr = pubsub.asyncIterator(args.pvname)
-      addSub(args.pvname)
-      withClose(itr, () => removeSub(args.pvname))
+      const itr = manager.pubsub.asyncIterator(args.pvname)
+      manager.add(args.pvname)
+      withClose(itr, () => manager.remove(args.pvname))
       return itr
     }
   })

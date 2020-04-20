@@ -2,7 +2,7 @@ import { ApolloServer } from 'apollo-server'
 import 'reflect-metadata'
 import { buildSchema } from 'type-graphql'
 
-import { ChannelResolver } from './db/resolvers'
+import { ChannelResolver } from './resolver'
 
 (async (): Promise<void> => {
   const PORT = isNaN(parseInt(process.env.PORT)) ? 3000 : parseInt(process.env.PORT)
