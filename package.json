@@ -1,6 +1,6 @@
 {
   "name": "epics-proxy",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A proxy bringing EPICS IOC to the modern web.",
   "main": "dist/index.js",
   "engines": {
