@@ -48,7 +48,7 @@ Mutation: {
 }
 ```
 
-returns true on success, false otherwise.
+returns true on success, false otherwise.(not tested yet)
 
 ## camonitor
 
@@ -59,3 +59,13 @@ Subscription {
   }
 }
 ```
+
+note:
+
+1. when pvname does not exist, an error will be pushed to the client once but the connection is left open.
+
+# Roadmap
+
+- test caput
+- implement auto-close of subscription on error
+- fix withClose

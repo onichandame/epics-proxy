@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "apollo-server": "^2.12.0",
-    "epics-ioc-connection": "^0.0.6",
+    "epics-ioc-connection": "^0.0.7",
     "graphql": "^14",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^0.17.6"

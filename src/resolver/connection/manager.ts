@@ -1,6 +1,9 @@
 import { CA } from 'epics-ioc-connection'
+import { PubSub } from 'apollo-server'
 
 import { camonitor } from './ca'
+
+export const pubsub = new PubSub()
 
 const channels = new Map<string, {
   channel: CA.Channel;
@@ -8,13 +11,21 @@ const channels = new Map<string, {
 }>()
 
 export const add = async (pvname: string): Promise<CA.Channel> => {
+  let channel: CA.Channel
+  try {
+    channel = await camonitor(pvname)
+  } catch (e) {
+    pubsub.publish(pvname, e)
+    throw e
+  }
   if (!channels.has(pvname)) {
     channels.set(pvname, {
-      channel: await camonitor(pvname),
+      channel,
       connections: 0
     })
+    channels.get(pvname).channel.on('value', data => pubsub.publish(pvname, data))
   }
-  return channels.get(pvname).channel
+  return channel
 }
 
 export const get = async (pvname: string): Promise<CA.Channel> => {

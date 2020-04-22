@@ -1,8 +1,8 @@
 import { Field, Resolver, Query, Mutation, Subscription, Args, ArgsType, Root } from 'type-graphql'
 
-import { get, put } from './connection'
+import { get, put, manager as con } from './connection'
 import { Channel } from './channel'
-import { manager } from './subscription'
+import { manager as sub } from './subscription'
 import { withClose } from './utils'
 
 @ArgsType()
@@ -39,14 +39,14 @@ export class ChannelResolver {
   }
 
   @Subscription({
-    subscribe: ({ args }) => {
-      const itr = manager.pubsub.asyncIterator(args.pvname)
-      manager.add(args.pvname)
-      withClose(itr, () => manager.remove(args.pvname))
-      return itr
+    subscribe: (_, { pvname }: GetArgs, context) => {
+      const itr = con.pubsub.asyncIterator(pvname)
+      sub.add(pvname)
+        .catch(e => console.log(e))
+      return withClose(itr, () => sub.remove(pvname))
     }
   })
-  camonitor (@Root() value: Channel['value']): Channel {
+  camonitor (@Args() _: GetArgs, @Root() value: Channel['value']): Channel {
     return {
       value
     }
