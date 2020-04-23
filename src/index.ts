@@ -2,7 +2,7 @@ import { ApolloServer } from 'apollo-server'
 import 'reflect-metadata'
 import { buildSchema } from 'type-graphql'
 
-import { ChannelResolver } from './resolver'
+import { Resolvers } from './resolver'
 
 (async (): Promise<void> => {
   const PORT = isNaN(parseInt(process.env.PORT)) ? 3000 : parseInt(process.env.PORT)
@@ -10,7 +10,7 @@ import { ChannelResolver } from './resolver'
   const server = new ApolloServer({
     schema: await buildSchema({
       validate: false,
-      resolvers: [ChannelResolver]
+      resolvers: [...Resolvers]
     })
   })
 
