@@ -21,15 +21,18 @@ class GetArgs {
 }
 
 @Resolver(() => Channel)
-export class ChannelResolver {
+export class CAGetResolver {
   @Query(() => Channel)
-  async caget (@Args(){ pvname }: GetArgs) {
+  async ca (@Args(){ pvname }: GetArgs) {
     const value = await get(pvname)
     return { value }
   }
+}
 
+@Resolver(() => Channel)
+export class CAPutResolver {
   @Mutation(() => Boolean)
-  async caput (@Args(){ pvname, value }: PutArgs) {
+  async ca (@Args(){ pvname, value }: PutArgs) {
     try {
       await put(pvname, value)
       return true
@@ -37,7 +40,10 @@ export class ChannelResolver {
       return false
     }
   }
+}
 
+@Resolver(() => Channel)
+export class CAMonitorResolver {
   @Subscription({
     subscribe: (_, { pvname }: GetArgs, context) => {
       const itr = con.pubsub.asyncIterator(pvname)
@@ -46,9 +52,11 @@ export class ChannelResolver {
       return withClose(itr, () => sub.remove(pvname))
     }
   })
-  camonitor (@Args() _: GetArgs, @Root() value: Channel['value']): Channel {
+  ca (@Args() _: GetArgs, @Root() value: Channel['value']): Channel {
     return {
       value
     }
   }
 }
+
+export const Resolvers = [CAGetResolver, CAPutResolver, CAMonitorResolver]

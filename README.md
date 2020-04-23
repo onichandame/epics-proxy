@@ -30,42 +30,32 @@ docker run -d onichandame/epics-proxy:latest
 
 # API
 
-## caget
+## CA
+
+### Channel
 
 ```graphql
-Query: {
-  caget(pvname) {
-    value
-  }
+type Channel {
+value: String!
 }
 ```
 
-## caput
+### Get
 
 ```graphql
-Mutation: {
-  caput(pvname, value)
-}
+query ca(pvname: String!): Channel!
+```
+
+### Put
+
+```graphql
+mutation ca(pvname: String!, value: String!): Boolean!
 ```
 
 returns true on success, false otherwise.(not tested yet)
 
-## camonitor
+## Monitor
 
 ```graphql
-Subscription {
-  camonitor(pvname) {
-    value
-  }
-}
+subscription ca(pvname: String!): Channel!
 ```
-
-note:
-
-1. when pvname does not exist, an error will be pushed to the client once but the connection is left open.
-
-# Roadmap
-
-- test caput
-- implement auto-close of subscription on error
-- fix withClose
