@@ -1,0 +1,7 @@
+{
+  "mode":"file",
+  "src": "src",
+  "out": "docs",
+  "readme": "README.md",
+  "exclude":["node_modules"]
+}
