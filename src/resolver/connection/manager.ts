@@ -10,14 +10,24 @@ const channels = new Map<string, {
   connections: number;
 }>()
 
+export const get = async (pvname: string): Promise<CA.Channel> => {
+  if (channels.has(pvname)) {
+    return channels.get(pvname).channel
+  } else {
+    throw new Error(`connection ${pvname} not found`)
+  }
+}
+
 export const add = async (pvname: string): Promise<CA.Channel> => {
   let channel: CA.Channel
+  // catch connection error
   try {
     channel = await camonitor(pvname)
   } catch (e) {
     pubsub.publish(pvname, e)
     throw e
   }
+  // add subscription to ioc on the first connection
   if (!channels.has(pvname)) {
     channels.set(pvname, {
       channel,
@@ -25,15 +35,12 @@ export const add = async (pvname: string): Promise<CA.Channel> => {
     })
     channels.get(pvname).channel.on('value', data => pubsub.publish(pvname, data))
   }
+  // add one to the connection count
+  channels.set(pvname, {
+    channel: await get(pvname),
+    connections: channels.get(pvname).connections + 1
+  })
   return channel
-}
-
-export const get = async (pvname: string): Promise<CA.Channel> => {
-  if (channels.has(pvname)) {
-    return channels.get(pvname).channel
-  } else {
-    throw new Error(`connection ${pvname} not found`)
-  }
 }
 
 export const remove = async (pvname: string): Promise<void> => {
