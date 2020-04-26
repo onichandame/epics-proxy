@@ -12,7 +12,7 @@
     "build": "tsc",
     "start": "node .",
     "dev": "nodemon",
-    "generate": "graphql-codegen --config codegen.yml"
+    "doc": "typedoc"
   },
   "repository": {
     "type": "git",
@@ -41,11 +41,12 @@
     "nodemon": "^2.0.3",
     "ts-jest": "^25.4.0",
     "ts-node": "^8.9.0",
+    "typedoc": "^0.17.4",
     "typescript": "^3.8.3"
   },
   "dependencies": {
     "apollo-server": "^2.12.0",
-    "epics-ioc-connection": "^0.0.8",
+    "epics-ioc-connection": "^0.0.9",
     "graphql": "^14.1.1",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^0.17.6"
