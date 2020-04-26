@@ -2,6 +2,7 @@ import { ApolloServer } from 'apollo-server'
 import 'reflect-metadata'
 import { buildSchema } from 'type-graphql'
 
+import { logger } from './logger'
 import { Resolvers } from './resolver'
 
 (async (): Promise<void> => {
@@ -18,6 +19,6 @@ import { Resolvers } from './resolver'
   })
 
   const { url, subscriptionsUrl } = await server.listen({ port: PORT })
-  console.log(`🚀 server ready at ${url}`)
-  console.log(`🚀 subscriptions ready at ${subscriptionsUrl}`)
+  logger.info(`🚀 server ready at ${url}`)
+  logger.info(`🚀 subscriptions ready at ${subscriptionsUrl}`)
 })()
