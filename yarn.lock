@@ -2079,10 +2079,10 @@ end-of-stream@^1.1.0:
   dependencies:
     once "^1.4.0"
 
-epics-ioc-connection@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/epics-ioc-connection/-/epics-ioc-connection-0.0.8.tgz#054c3752d19bc1be6f61d2aec5dee61aecc1501d"
-  integrity sha512-Y7vb5ndlv+6poHaEWJ56pQJwj0EN+bunvxuazEh3o5/Ovjb5zhYllNCCp6sRw8xz2xYlyRC94eqFXqLPERq9nw==
+epics-ioc-connection@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/epics-ioc-connection/-/epics-ioc-connection-0.0.9.tgz#7cc0499cb8ec5f2857c9df9f58002caa6f13d6d2"
+  integrity sha512-fj3B/TpQ3/pWW6SozWf15s37I4ie+/zDetkD3IWT9r1ubakib/jcW7q9mBYKYlXBNPiAGA/TfTKZdKk0PeHALQ==
   dependencies:
     ffi-napi "^2.4.7"
     ref-struct-napi "^1.1.0"
